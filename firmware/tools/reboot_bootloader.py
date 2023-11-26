@@ -20,10 +20,7 @@ for dev in usb.core.find(find_all=True, idVendor=PLOOPY_VID, idProduct=PLOOPY_PI
     except Exception as e:
         # The headphones do not respond to the vendor command, as they have already rebooted,
         # so for now, we always end up here.
-        if e.errno == 32:
-            # libusb pipe error, this is expected. OpenUSB doesnt report an error.
-            pass
-        else:
+        if e.errno != 32:
             print(e)
 
 print(f"Sent a reboot command to {device_count} Ploopy devices.")
